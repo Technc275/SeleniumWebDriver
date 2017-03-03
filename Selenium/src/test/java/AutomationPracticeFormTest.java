@@ -43,7 +43,7 @@ public class AutomationPracticeFormTest {
     @After
     public  void closeAutomationPracticeForm(){
 
-       driver.quit();
+      // driver.quit();
     }
 
     @Ignore
@@ -203,6 +203,162 @@ public class AutomationPracticeFormTest {
         Assert.assertEquals(first_name_coordinate.getY(),last_name_coordinate.getY());
 
 
+    }
+
+    @Ignore
+    @Test
+
+    public void cssSelectorPath(){
+
+        // table tbody tr[2] td[2]
+
+        WebElement div = driver.findElement(By.id("content"));
+
+       // WebElement textbox_first_name = div.findElement(By.cssSelector("form div input")); FEW ELEMENT
+
+        List<WebElement> textboxs =  div.findElements(By.cssSelector("form div input"));
+
+
+        for (WebElement textbox: textboxs
+             ) {
+
+            System.out.println(textbox.getAttribute("name"));
+        }
+
+        List<WebElement> textboxs2 =  div.findElements(By.cssSelector("form > div > input"));
+
+        System.out.println("---------------------------------");
+
+        for (WebElement textbox: textboxs2
+                ) {
+
+            System.out.println(textbox.getAttribute("name"));
+        }
+
+    }
+
+    @Ignore
+    @Test
+    public  void cssSelectorPathAttribute(){
+
+        WebElement div = driver.findElement(By.id("content"));
+
+
+
+        List<WebElement> textboxs =  div.findElements(By.cssSelector("form div input[type='checkbox']"));
+
+        for (WebElement textbox: textboxs
+                ) {
+
+            System.out.println(textbox.getAttribute("value"));
+        }
+
+
+    }
+
+    @Ignore
+    @Test
+    public  void cssSelectorPathClass(){
+
+        // tag.classname
+
+        WebElement div = driver.findElement(By.id("content"));
+
+
+
+        List<WebElement> textboxs =  div.findElements(By.cssSelector("form div.wpoi-filled input[type='checkbox']"));
+
+        for (WebElement textbox: textboxs
+                ) {
+
+            System.out.println(textbox.getAttribute("value"));
+        }
+
+
+        // div.findElements(By.classname("icon"));
+        List<WebElement> icons =  div.findElements(By.cssSelector(".icon"));
+
+        for (WebElement textbox: textboxs
+                ) {
+
+            System.out.println(textbox.getAttribute("viewBox"));
+        }
+
+
+
+    }
+
+    //1 xpath relation
+    @Ignore
+    @Test
+    public  void getLastNameXpath(){
+
+        WebElement div = driver.findElement(By.id("content"));
+        WebElement textbox= div.findElement(By.xpath("//form/fieldset/div[1]/input[2]"));
+
+        textbox.sendKeys("Hello");
+    }
+
+    @Ignore
+    //2 css selector
+    @Test
+    public  void getLastNameCss(){
+
+        WebElement div = driver.findElement(By.id("content"));
+        WebElement textbox= div.findElement(By.cssSelector("input[name='lastname']"));
+
+        textbox.sendKeys("Hello1");
+    }
+
+    @Ignore
+    //3 inner block By.tag By.className
+    @Test
+    public  void getLastNameCommon(){
+
+        WebElement div = driver.findElement(By.id("content"));
+        List<WebElement> textboxs= div.findElements(By.tagName("input"));
+
+        for (WebElement textbox:textboxs
+             ) {
+
+            if (textbox.getAttribute("name").equals("lastname")){
+                textbox.sendKeys("Hello2");
+            }
+
+        }
+
+
+    }
+
+
+    //regular expression
+
+    @Test
+    public void cssSelecterStartWith(){
+        //x ^= y x start with y  x= abxd   y=ab
+
+        List<WebElement> radios = driver.findElements(By.cssSelector("[id^='exp']"));
+
+        for (WebElement radio:radios
+                ) {
+
+            System.out.println(radio.getAttribute("value"));
+
+        }
+    }
+
+    @Test
+    public void cssSelecterEndWith(){
+        //x $= y x start with y  x= abxd   y=xd
+
+        List<WebElement> radios = driver.findElements(By.cssSelector("[id$='1']"));
+
+        for (WebElement radio:radios
+                ) {
+
+            System.out.println(radio.getAttribute("id"));
+
+        }
     }
 
 }
